@@ -6,16 +6,12 @@ const { SALT_ROUNDS, SECRET } = require("../constants");
 const User = require("../models/User");
 
 exports.register = async (information) => {
-  // if (!/^[\w]+@[a-z]+\.[a-z]+$/.test(information.email)) {
-  //   throw new Error("You should fill in a valid email address.");
-  // }
-
-  if (information.username.length < 5) {
-    throw new Error("Your username should be at least 5 characters long.");
+  if (information.username.length < 4) {
+    throw new Error("Your username should be at least 4 characters long.");
   }
 
-  if (information.email.length < 10) {
-    throw new Error("Your email should be at least 10 characters long.");
+  if (!/^[\w]+@[a-z]+\.[a-z]+$/.test(information.email)) {
+    throw new Error("You should fill in a valid email address.");
   }
 
   if (information.password.length < 4) {
@@ -26,25 +22,25 @@ exports.register = async (information) => {
     throw new Error("Your passwords do not match.");
   }
 
-  try {
-    const hashedPassword = await bcrypt.hash(information.password, SALT_ROUNDS);
+  // try {
+  //   const hashedPassword = await bcrypt.hash(information.password, SALT_ROUNDS);
 
-    const user = {
-      password: hashedPassword,
-      username: information.username,
-      email: information.email,
-    };
+  //   const user = {
+  //     password: hashedPassword,
+  //     username: information.username,
+  //     email: information.email,
+  //   };
 
-    const createdUser = await User.create(user);
+  //   const createdUser = await User.create(user);
 
-    return (token = await tokenCreator(
-      createdUser._id,
-      createdUser.username,
-      createdUser.email
-    ));
-  } catch (error) {
-    throw new Error(error);
-  }
+  //   return (token = await tokenCreator(
+  //     createdUser._id,
+  //     createdUser.username,
+  //     createdUser.email
+  //   ));
+  // } catch (error) {
+  //   throw new Error(error);
+  // }
 };
 
 exports.login = async (information) => {

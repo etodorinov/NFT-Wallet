@@ -4,8 +4,7 @@ const businessService = require("../services/businessService");
 
 const { isNotAuthorized } = require("../middlewares/userMiddleware");
 
-router.get("/create", (req, res) => {
-  //isNotAuthorized
+router.get("/create", isNotAuthorized, (req, res) => {
   res.render("create");
 });
 
