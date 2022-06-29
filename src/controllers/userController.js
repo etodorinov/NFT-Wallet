@@ -32,7 +32,7 @@ router.post("/register", isAuthorized, async (req, res) => {
     const token = await userService.register(req.body);
 
     res.cookie(COOKIE_ONE, token, { httpOnly: true });
-    res.redirect("/");
+    res.redirect("/business/all");
   } catch (error) {
     res.render("register", { error, information: req.body });
   }

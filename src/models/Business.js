@@ -16,12 +16,8 @@ const businessSchema = new mongoose.Schema({
     },
   },
   price: { type: Number, required: true, min: 0.01 },
-  description: { type: String, required: true, minlength: 10 },
-  payment: {
-    type: String,
-    enum: ["crypto-wallet", "credit-card", "debit-card", "paypal"],
-  },
-  buyers: [{ type: mongoose.Types.ObjectId, ref: "User" }],
+  description: { type: String, required: true, minlength: 6 },
+  buyer: { type: mongoose.Types.ObjectId, ref: "User" },
   creator: { type: mongoose.Types.ObjectId, ref: "User" },
   initialCoin: { type: String },
 });
