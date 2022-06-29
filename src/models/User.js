@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
       message: "You should fill in a valid email address.",
     },
   },
-  username: { type: String, required: true, minlength: 5 },
+  username: { type: String, required: true, minlength: 4 },
   password: { type: String, required: true, minlength: 4 },
   businessBuyed: [{ type: mongoose.Types.ObjectId, ref: "Business" }],
   businessCreated: [{ type: mongoose.Types.ObjectId, ref: "Business" }],

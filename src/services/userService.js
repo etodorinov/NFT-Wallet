@@ -22,39 +22,34 @@ exports.register = async (information) => {
     throw new Error("Your passwords do not match.");
   }
 
-  // try {
-  //   const hashedPassword = await bcrypt.hash(information.password, SALT_ROUNDS);
+  try {
+    const hashedPassword = await bcrypt.hash(information.password, SALT_ROUNDS);
 
-  //   const user = {
-  //     password: hashedPassword,
-  //     username: information.username,
-  //     email: information.email,
-  //   };
+    const user = {
+      password: hashedPassword,
+      username: information.username,
+      email: information.email,
+    };
 
-  //   const createdUser = await User.create(user);
+    const createdUser = await User.create(user);
 
-  //   return (token = await tokenCreator(
-  //     createdUser._id,
-  //     createdUser.username,
-  //     createdUser.email
-  //   ));
-  // } catch (error) {
-  //   throw new Error(error);
-  // }
+    return (token = await tokenCreator(
+      createdUser._id,
+      createdUser.username,
+      createdUser.email
+    ));
+  } catch (error) {
+    throw new Error(error);
+  }
 };
 
 exports.login = async (information) => {
-  // if (!/^[\w]+@[a-z]+\.[a-z]+$/.test(information.email)) {
-  //   throw new Error("You should fill in a valid email address.");
-  // }
-
-  if (information.email.length < 10) {
+  if (information.username.length < 4) {
     throw new Error("Invalid username or password.");
   }
 
-  const user = await User.findOne({ email: information.email }).lean();
-  console.log(information.email);
-  console.log(user);
+  const user = await User.findOne({ username: information.username }).lean();
+
   if (!user) {
     throw new Error("Invalid username or password.");
   }

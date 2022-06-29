@@ -43,7 +43,7 @@ router.post("/login", isAuthorized, async (req, res) => {
     const token = await userService.login(req.body);
 
     res.cookie(COOKIE_ONE, token, { httpOnly: true });
-    res.redirect("/");
+    res.redirect("/business/all");
   } catch (error) {
     res.render("login", { error, information: req.body });
   }
