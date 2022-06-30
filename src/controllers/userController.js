@@ -13,7 +13,8 @@ router.get("/register", isAuthorized, (req, res) => {
   res.render("register");
 });
 
-router.get("/login", isAuthorized, (req, res) => {
+router.get("/login", (req, res) => {
+  //isAuthorized,
   res.render("login");
 });
 
@@ -32,7 +33,7 @@ router.post("/register", isAuthorized, async (req, res) => {
     const token = await userService.register(req.body);
 
     res.cookie(COOKIE_ONE, token, { httpOnly: true });
-    res.redirect("/business/all");
+    res.redirect("/");
   } catch (error) {
     res.render("register", { error, information: req.body });
   }
@@ -43,7 +44,7 @@ router.post("/login", isAuthorized, async (req, res) => {
     const token = await userService.login(req.body);
 
     res.cookie(COOKIE_ONE, token, { httpOnly: true });
-    res.redirect("/business/all");
+    res.redirect("/");
   } catch (error) {
     res.render("login", { error, information: req.body });
   }

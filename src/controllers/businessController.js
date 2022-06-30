@@ -14,6 +14,12 @@ router.get("/all", async (req, res) => {
   res.render("explore", { availableBusiness });
 });
 
+router.get("/search", async (req, res) => {
+  const availableBusiness = await businessService.getAll();
+
+  res.render("search", { availableBusiness });
+});
+
 router.get("/details/", async (req, res) => {
   // const business = await businessService.getOneDetailed(req.params.id);
 

@@ -62,14 +62,15 @@ https://templatemo.com/tm-577-liberty-market
               <li><a href="/" class="active">Home</a></li>
               <li><a href="/business/all">Explore</a></li>
               {{#if user}}
-              <li><a href="/business/details/:id">Item Details</a></li>
-              <li><a href="/user/profile">Author</a></li>
+              {{!-- <li><a href="/business/details/:id">Item Details</a></li> --}}
+              {{!-- <li><a href="/user/profile">Author</a></li> --}}
               <li><a href="/business/create">Create Yours</a></li>
               <li><a href="/user/logout">Logout</a></li>
               {{else}}
               <li><a href="/user/login">Login</a></li>
               <li><a href="/user/register">Register</a></li>
               {{/if}}
+              <li><a href="/business/search">Search</a></li>
             </ul>
             <a class='menu-trigger'>
               <span>Menu</span>
